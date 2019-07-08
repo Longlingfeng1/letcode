@@ -70,7 +70,7 @@ public:
     }
 };
 
-解法3：牛顿迭代法
+解法3：牛顿迭代法  https://matongxue.com/madocs/205.html
 
 class Solution {
 public:
