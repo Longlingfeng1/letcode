@@ -36,6 +36,14 @@ i必须用long类型。因为如果x是Integer.MAX_VALUE就会报错。
 Long.compare(x,y)>0;
 
 
+    舍掉小数取整:Math.floor(3.5)=3
+    四舍五入取整:Math.rint(3.5)=4
+    进位取整:Math.ceil(3.1)=4 
+    取绝对值：Math.abs(-3.5)=3.5
+    取余数：A%B = 余数 
+
+
+
 
 
 其他解法。
@@ -75,13 +83,6 @@ public:
 https://matongxue.com/madocs/205.html
 https://steve.blog.csdn.net/article/details/92024963
 
-
-这种算法的原理很简单，我们仅仅是不断用 (x,f(x))(x, f(x))(x,f(x)) 的切线来逼近方程 x2−a=0x^2-a=0x2−a=0 的根。
-根号 aaa 实际上就是 x2−a=0x^2-a=0x2−a=0 的一个正实根，这个函数的导数是 2x2x2x。
-也就是说，函数上任一点 (x,f(x))(x,f(x))(x,f(x)) 处的切线斜率是 2x2x2x。
-那么，x−f(x)/(2x)x-f(x)/(2x)x−f(x)/(2x) 就是一个比 xxx 更接近的近似值。
-代入 f(x)=x2−af(x)=x^2-af(x)=x2−a 得到 x−(x2−a)/(2x)x-(x^2-a)/(2x)x−(x2−a)/(2x)，
-也就是 (x+a/x)/2(x+a/x)/2(x+a/x)/2。
 
 class Solution {
 public:
