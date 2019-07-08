@@ -1,0 +1,93 @@
+实现 int sqrt(int x) 函数。
+
+计算并返回 x 的平方根，其中 x 是非负整数。
+
+由于返回类型是整数，结果只保留整数的部分，小数部分将被舍去。
+
+示例 1:
+
+输入: 4
+输出: 2
+
+示例 2:
+
+输入: 8
+输出: 2
+说明: 8 的平方根是 2.82842..., 
+     由于返回类型是整数，小数部分将被舍去。
+
+class Solution {
+    public int mySqrt(int x) {
+        if(x==1)
+            return 1;
+        long i=0l;
+        long te=0l;
+        for(i=0;i<=x/2;i++){
+            te=i*i;
+            if(Long.compare(te,x)>0){
+                break;
+            }
+        }
+        return (int)i-1;
+    }
+}
+
+i必须用long类型。
+Long.compare(x,y)>0;
+
+
+
+
+其他解法。
+解法1：使用内置函数
+
+虽然本题的意思肯定不是要使用内置函数，但是我们要知道有这样的库函数
+
+class Solution {
+public:
+    int mySqrt(int x) {
+        return sqrt(x);
+    }
+};
+
+解法2：二分搜索
+
+class Solution {
+public:
+    int mySqrt(int x) {
+        //注：在中间过程计算平方的时候可能出现溢出，所以用long long。
+        long long i=0;
+        long long j=x/2+1;//对于一个非负数n，它的平方根不会大于（n/2+1）
+        while(i<=j)
+        {
+            long long mid=(i+j)/2;
+            long long res=mid*mid;
+            if(res==x) return mid;
+            else if(res<x) i=mid+1;
+            else j=mid-1;
+        }
+        return j;
+    }
+};
+
+解法3：牛顿迭代法
+
+class Solution {
+public:
+    int mySqrt(int x) {
+        if (x == 0) return 0;
+        double last=0;
+        double res=1;
+        while(res!=last)
+        {
+            last=res;
+            res=(res+x/res)/2;
+        }
+        return int(res);
+    }
+};
+
+作者：gpe3DBjDS1
+链接：https://leetcode-cn.com/problems/two-sum/solution/x-de-ping-fang-gen-by-gpe3dbjds1/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
