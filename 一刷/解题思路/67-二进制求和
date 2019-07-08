@@ -1,14 +1,76 @@
+给定两个二进制字符串，返回他们的和（用二进制表示）。
 
+输入为非空字符串且只包含数字 1 和 0。
+
+示例 1:
+
+输入: a = "11", b = "1"
+输出: "100"
+
+示例 2:
+
+输入: a = "1010", b = "1011"
+输出: "10101"
+
+class Solution {
+    public String addBinary(String a, String b) {
+        int i=a.length()-1;
+        int j=b.length()-1;
+        int add=0;
+        StringBuilder builder = new StringBuilder("");
+        int a1;
+        int b1;
+        while(i>=0||j>=0){
+            if(i<0){
+                a1=0;
+            }else{
+                a1 = a.charAt(i)-'0'; 
+            }
+            if(j<0){
+                b1=0;
+            }else{
+                b1 = b.charAt(j)-'0';
+            }
+            
+            if((a1+b1+add)/2!=0){
+                
+                builder.append((a1+b1+add)%2);
+                add=1;
+            }else{
+               
+                builder.append((a1+b1+add)%2);
+                add=0;
+            }
+            
+            i--;
+            j--;
+        }
+        if(add!=0){
+            builder.append('1');
+        }else{
+            builder.append("");
+        }
+        return builder.reverse().toString();
+    }
+}
   
   
+ 
   
   
-  
-  
-   String str = "Test string";
-    StringBuilder strBuilder = new StringBuilder(str);
-    strBuilder.setCharAt(1, 'X');
-    str=Builder.toString();
+遗忘点；
+1,StringBuilder用法.
+String str = "Test string";
+StringBuilder strBuilder = new StringBuilder(str);
+strBuilder.setCharAt(1, 'X');
+str=Builder.toString();
+
+strBuilder.append(x)方法可以append int类型 char类型 String类型
 
 String不可变
 StringBuilder可变 
+
+2，int char 类型的相互转化
+int num1 = a.charAt(i)-'0';
+String s = i+"";
+String s=String.valueOf(i)
