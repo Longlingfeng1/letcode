@@ -93,7 +93,13 @@ public:
     }
 };
 
-作者：gpe3DBjDS1
-链接：https://leetcode-cn.com/problems/two-sum/solution/x-de-ping-fang-gen-by-gpe3dbjds1/
-来源：力扣（LeetCode）
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+int mySqrt(int x){ 
+double res = 1; 
+if( x == 0 || x == 1) 
+     return x;
+ while( fabs( res*res - x ) > 0.5)
+ { // 相差小于0.5时退出循环
+ res = ( res + x/res )/2; 
+ } 
+ return int(res); }
+
