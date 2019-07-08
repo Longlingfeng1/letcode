@@ -70,7 +70,12 @@ public:
     }
 };
 
-解法3：牛顿迭代法  https://matongxue.com/madocs/205.html
+解法3：牛顿迭代法 
+
+https://matongxue.com/madocs/205.html
+https://steve.blog.csdn.net/article/details/92024963
+
+
 这种算法的原理很简单，我们仅仅是不断用 (x,f(x))(x, f(x))(x,f(x)) 的切线来逼近方程 x2−a=0x^2-a=0x2−a=0 的根。
 根号 aaa 实际上就是 x2−a=0x^2-a=0x2−a=0 的一个正实根，这个函数的导数是 2x2x2x。
 也就是说，函数上任一点 (x,f(x))(x,f(x))(x,f(x)) 处的切线斜率是 2x2x2x。
