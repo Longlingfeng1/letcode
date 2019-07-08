@@ -1,0 +1,14 @@
+
+  
+  
+  
+  
+  
+  
+   String str = "Test string";
+    StringBuilder strBuilder = new StringBuilder(str);
+    strBuilder.setCharAt(1, 'X');
+    str=Builder.toString();
+
+String不可变
+StringBuilder可变 
