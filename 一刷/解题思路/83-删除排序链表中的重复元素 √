@@ -1,0 +1,56 @@
+给定一个排序链表，删除所有重复的元素，使得每个元素只出现一次。
+
+示例 1:
+
+输入: 1->1->2
+输出: 1->2
+
+示例 2:
+
+输入: 1->1->2->3->3
+输出: 1->2->3
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+ 
+ 思路：
+ 
+ 记录当前节点和遍历节点。
+ 遍历节点如果和当前节点值相同：当前节点.next==null，继续向后遍历。
+ 如果值不相同：连接当前节点和遍历节点。当前节点变为当前节点。
+ 
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null)
+            return null;
+        if(head.next==null)
+            return head;
+        ListNode cur=head;
+       
+        ListNode after =head.next;
+        while(after!=null){
+            if(after.val == cur.val){
+                cur.next=null;
+                after=after.next;
+                
+            }
+            else{
+               cur.next=after;
+                cur=after;
+                after=after.next;
+                cur.next=null;
+            }
+            
+        }
+        return head;
+    }
+}
+
+
+注意：
+cur.next  而不是 cur->next;
