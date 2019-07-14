@@ -1,0 +1,77 @@
+给定一个二叉树，找出其最小深度。
+
+最小深度是从根节点到最近叶子节点的最短路径上的节点数量。
+
+说明: 叶子节点是指没有子节点的节点。
+
+示例:
+
+给定二叉树 [3,9,20,null,null,15,7],
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回它的最小深度  2.
+
+解题思路：
+利用二叉树的最大深度。先提交的代码为
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null)
+            return 0;
+        return Math.min(minDepth(root.left),minDepth(root.right))+1;
+    }
+}
+但是会有错误
+    1
+   / 
+  2  
+
+这样会返回1；而不是2。因为是返回的左右两子树的高度的最小值（此例子中为右子树 0）+1；因此看来此题并不是让求最小深度，而是到最近的叶子节点的深度。
+所以对于只有一个叶子节点的节点，返回的是有节点的那一个分支的深度值，即为两分支的深度的最大值+1。
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null)
+            return 0;
+        if(height(root.left)==0||height(root.right)==0)
+            return Math.max(minDepth(root.left),minDepth(root.right))+1;
+        return Math.min(minDepth(root.left),minDepth(root.right))+1;
+    }
+    public int height(TreeNode node){
+        if(node==null)
+            return 0;
+        return Math.max(height(node.left),height(node.right))+1;
+                        }
+}
+
+
+别人的方法。重点是理解递归的结束条件。
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root==null)
+            return 0;
+        if(root.left==null&&root.right==null)
+            return 1;
+        int min_depth = 10000;
+        if(root.left!=null)
+            min_depth = Math.min(minDepth(root.left),min_depth);
+        if(root.right!=null)
+            min_depth = Math.min(minDepth(root.right),min_depth);
+        return min_depth+1;
+        
+    }
+    
+}
