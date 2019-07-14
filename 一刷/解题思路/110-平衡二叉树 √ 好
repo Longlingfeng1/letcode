@@ -44,7 +44,7 @@ class Solution {
     public boolean isBalanced(TreeNode root) {
         if(root==null)
             return true;
-        if(root.left==null&&root.right==null)
+        if(root.left==null&&root.right==null)    //此句可有可无，因为计算高度的时候可以传入null
             return true;
         if(Math.abs(height(root.left)-height(root.right))>1)
             return false;
