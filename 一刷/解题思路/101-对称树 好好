@@ -1,0 +1,96 @@
+给定一个二叉树，检查它是否是镜像对称的。
+
+例如，二叉树 [1,2,2,3,4,4,3] 是对称的。
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+但是下面这个 [1,2,2,null,3,null,3] 则不是镜像对称的:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+说明:
+
+如果你可以运用递归和迭代两种方法解决这个问题，会很加分。
+
+解题思路:
+刚开始的思路是中序遍历入栈，写到list中，如果list是中心对称的，说明此二叉树是对称的。但是这么做是错的。
+
+改变思路，不是自己跟自己比较，而是复制一个，两个相比较。
+
+错误解法：
+class Solution {
+    Stack<Integer> stack = new Stack();
+    public boolean isSymmetric(TreeNode root) {
+        if(root==null)
+            return true;
+        List<Integer> result1 = new ArrayList();
+        List<Integer> result2 = new ArrayList();
+        LDR(root);
+        while(!stack.isEmpty()){
+            int a =stack.pop();
+            result1.add(a);
+            result2.add(a);
+        }
+        
+        Collections.reverse(result1);
+        for(int i=0;i<result1.size();i++){
+            if(result1.get(i)!=result2.get(i))
+                return false;
+        }
+        return true;
+    }
+    
+    public void LDR(TreeNode root){
+        
+        if(root.left!=null)
+            LDR(root.left);
+        
+        stack.push(new Integer(root.val));
+        
+        if(root.right!=null)
+            LDR(root.right);
+        
+    }
+}
+
+正确解法：
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList();
+        q.add(root);
+        q.add(root);
+        while(!q.isEmpty()){
+            TreeNode t1=q.poll();
+            TreeNode t2=q.poll();
+            if(t1==null&&t2==null)
+                continue;
+            if(t1==null||t2==null)
+                return false;
+            if(t1.val!=t2.val)
+                return false;
+            q.add(t1.left);
+            q.add(t2.right);
+            q.add(t1.right);
+            q.add(t2.left);
+        }
+        return true;
+    } 
+}
+思路：：
+复制一个同样的树，两个互相比较。利用队列迭代，每次按照顺序入队，分别是t1.left t2.right t1.right t2.left
+如果t1 t2同时为空 continue，如果t1 t2只有一个为空，返回false。如果t1 t2两个val不相等直接返回false。最后如果不返回false 就返回true。
